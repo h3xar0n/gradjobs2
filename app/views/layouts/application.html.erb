@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gradjobs2</title>
+    <%= csrf_meta_tags %>
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+  <div class="swiper-container">
+  		<div class="swiper-wrapper">
+  			<div class="swiper-slide menu">
+  				<nav>
+  				  <ul>
+  				    <li><%= link_to "Home", root_url %></li>
+              <li><%= link_to "About", about_path %></li>
+              <li><%= link_to "Contact", contact_path %></li>
+              <li><%= link_to "Student", student_path %></li>
+              
+              <li>
+  				  </ul>
+  				</nav>
+  			</div>
+  			<div class="swiper-slide content">
+  				
+  				<div class="menu-button">
+  					<div class="bar"></div>
+  					<div class="bar"></div>
+  					<div class="bar"></div>
+  				</div>
+  				<div class="container">
+  					<%= yield %>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+  	<footer>
+  	  &copy; 2017 GradJobz
+  	</footer>
+
+<!-- Scripts -->
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>
+  	<script>
+	  	var toggleMenu = function(){
+	  		if (swiper.previousIndex == 0)
+	  			swiper.slidePrev()
+	  	}
+	  	, menuButton = document.getElementsByClassName('menu-button')[0]
+	  	, swiper = new Swiper('.swiper-container', {
+	  		slidesPerView: 'auto'
+	  		, initialSlide: 1
+	  		, resistanceRatio: .00000000000001
+	  		, onSlideChangeStart: function(slider) {
+	  			if (slider.activeIndex == 0) {
+	  				menuButton.classList.add('cross')
+	  				menuButton.removeEventListener('click', toggleMenu, false)
+	  			} else
+	  				menuButton.classList.remove('cross')
+	  		}
+	  		, onSlideChangeEnd: function(slider) {
+	  			if (slider.activeIndex == 0)
+	  				menuButton.removeEventListener('click', toggleMenu, false)
+	  			else
+	  				menuButton.addEventListener('click', toggleMenu, false)
+	  		}
+	  		, slideToClickedSlide: true
+	  	})
+  	</script>
+  	<!-- <script src="gradjobs2/app/assets/javascripts/initializeswiper.js"></script> -->
+	</body>
+</html>
